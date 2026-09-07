@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pathway to the PhD — Hospitality Administration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --card:#FAFAFA;
+    --card-2:#F1F1F1;
+    --ink:#111111;
+    --ink-soft:#4A4A4A;
+    --rail:#9B9B9B;
+    --node:#000000;
+    --node-soft:#2E2E2E;
+    --gain-me:#111111;
+    --gain-me-bg:#F0F0F0;
+    --gain-mentor:#111111;
+    --gain-mentor-bg:#F6F6F6;
+    --line:#DADADA;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:#EDEDED;font-family:'Inter',sans-serif;color:var(--ink);}
+  body{padding:0 16px 80px; display:flex; flex-direction:column; align-items:center;}
+  .sitenav { width:100%; background:#1b1a16; padding:10px 24px; display:flex; gap:16px; align-items:center; box-sizing:border-box; }
+  .sitenav a { color:#f5f4f0; text-decoration:none; font-size:13px; padding:6px 12px; border-radius:6px; font-family:'Inter',sans-serif; }
+  .sitenav a.active { background:#3a3830; font-weight:600; }
+  .pagepad { padding-top:40px; width:100%; max-width:960px; }
+  .sheet{width:100%; max-width:960px; background:var(--paper); box-shadow:0 20px 50px -20px rgba(0,0,0,.25); border:1px solid var(--line);}
+
+  header{ padding:48px 48px 34px; border-bottom:1px solid var(--line); }
+  .kicker{ font-size:13px; letter-spacing:.05em; color:var(--ink-soft); margin:0 0 12px; font-weight:700; text-transform:uppercase; }
+  h1{ font-family:'Newsreader',serif; font-weight:600; font-size:38px; line-height:1.16; margin:0 0 10px; }
+  header p.sub{ font-size:15px; color:var(--ink-soft); max-width:60ch; line-height:1.6; margin:0; }
+
+  /* ===== HORIZONTAL DOT TIMELINE ===== */
+  .hscroll{ padding:34px 0 30px; overflow-x:auto; border-bottom:1px solid var(--line); background:var(--card-2); }
+  .htrack{ display:flex; align-items:flex-start; padding:0 48px; min-width:max-content; position:relative; }
+  .htrack::before{ content:''; position:absolute; left:48px; right:48px; top:8px; height:1px; background:var(--rail); }
+  .hpoint{ width:126px; flex-shrink:0; text-align:center; position:relative; }
+  .hpoint .dot{ width:15px; height:15px; border-radius:50%; background:var(--node); border:3px solid var(--card-2); box-shadow:0 0 0 1px var(--rail); margin:0 auto 11px; position:relative; z-index:2; }
+  .hpoint .date{ font-size:11px; font-weight:700; letter-spacing:.03em; color:var(--ink); margin-bottom:4px; }
+  .hpoint .lbl{ font-size:12px; color:var(--ink-soft); line-height:1.4; padding:0 4px; }
+
+  /* ===== BREAKDOWN TABLE ===== */
+  section.breakdown{ padding:38px 48px; border-bottom:1px solid var(--line); }
+  section.breakdown h2{ font-family:'Newsreader',serif; font-weight:600; font-size:21px; margin:0 0 18px; }
+  table{ width:100%; border-collapse:collapse; font-size:14px; }
+  table th{ text-align:left; font-size:12px; letter-spacing:.03em; color:var(--ink-soft); font-weight:700; text-transform:uppercase; padding:0 10px 10px 0; border-bottom:2px solid var(--ink); }
+  table td{ padding:13px 10px 13px 0; border-bottom:1px solid var(--line); vertical-align:top; line-height:1.6; }
+  table td:first-child{ white-space:nowrap; font-weight:700; color:var(--ink); width:16%; }
+
+  /* ===== FILTER / SUB-FILTER / CONTENT ===== */
+  .filters{ padding:10px 0; }
+  details.filter{ border-bottom:1px solid var(--line); }
+  details.filter > summary{ list-style:none; cursor:pointer; padding:26px 48px; display:flex; align-items:center; justify-content:space-between; font-family:'Newsreader',serif; font-weight:600; font-size:22px; }
+  details.filter > summary::-webkit-details-marker{ display:none; }
+  details.filter > summary .chev{ font-size:15px; color:var(--ink); transition:transform .15s ease; }
+  details.filter[open] > summary .chev{ transform:rotate(90deg); }
+  details.filter > summary .n{ font-family:'Inter',sans-serif; font-weight:700; font-size:12px; color:var(--paper); background:var(--ink); width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; margin-right:16px; }
+  details.filter > summary .titlewrap{ display:flex; align-items:center; }
+
+  .subfilters{ padding:0 48px 22px 48px; }
+  details.subfilter{ background:var(--card); border:1px solid var(--line); margin-bottom:12px; }
+  details.subfilter > summary{ list-style:none; cursor:pointer; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; font-weight:700; font-size:15.5px; }
+  details.subfilter > summary::-webkit-details-marker{ display:none; }
+  details.subfilter > summary .chev{ font-size:12px; color:var(--ink-soft); transition:transform .15s ease; }
+  details.subfilter[open] > summary .chev{ transform:rotate(90deg); }
+  details.subfilter > summary .when{ font-size:11.5px; color:var(--ink-soft); font-weight:700; letter-spacing:.03em; text-transform:uppercase; display:block; margin-bottom:4px; }
+
+  .content{ padding:6px 20px 22px; font-size:15px; line-height:1.7; border-top:1px solid var(--line); margin-top:2px; }
+  .content h4{ font-size:12px; letter-spacing:.04em; color:var(--ink-soft); margin:18px 0 7px; font-weight:700; text-transform:uppercase; }
+  .content h4:first-child{ margin-top:16px; }
+  .content p{ margin:0 0 9px; }
+  .content ul{ margin:5px 0 9px; padding-left:20px; }
+  .content li{ margin-bottom:6px; }
+  .note{ font-style:italic; color:var(--ink-soft); font-size:13.5px; margin-top:7px; }
+
+  .gains{ display:flex; gap:14px; margin-top:12px; }
+  .gain{ flex:1; padding:15px 16px; border:1px solid var(--line); }
+  .gain.me{ background:var(--gain-me-bg); border-left:3px solid var(--ink); }
+  .gain.mentor{ background:var(--gain-mentor-bg); border-left:3px dashed var(--ink-soft); }
+  .gain .lbl{ font-size:11.5px; font-weight:700; letter-spacing:.03em; margin-bottom:7px; text-transform:uppercase; color:var(--ink); }
+  .gain ul{ margin:0; padding-left:17px; font-size:13.5px; line-height:1.6; }
+
+  .content table{ margin:7px 0 9px; }
+  .funding-note{ margin:11px 0; padding:14px 16px; background:var(--card-2); font-size:13.5px; line-height:1.65; border-left:3px solid var(--ink); }
+  .quote{ margin:7px 0; padding:11px 15px; background:var(--card-2); font-size:13.5px; font-style:italic; border-left:3px solid var(--rail); }
+
+  .content ul.sources{ list-style:none; padding:0; margin:0; }
+  .content ul.sources li{ margin-bottom:9px; }
+  .content ul.sources a{ color:var(--ink); font-size:13.5px; font-weight:600; }
+
+  footer{ padding:24px 48px 34px; font-size:12.5px; color:var(--ink-soft); line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="sitenav">
+  <a href="index.html">Home</a>
+  <a href="faculty.html">Faculty Directory</a>
+  <a href="phd-pathway.html" class="active">PhD Pathway</a>
+</div>
+<div class="pagepad">
+<div class="sheet">
+
+  <header>
+    <p class="kicker">HILTON COLLEGE · GLOBAL HOSPITALITY LEADERSHIP</p>
+    <h1>From Undergraduate to PhD<br>A Hospitality Administration Pathway (2026–2029+)</h1>
+  </header>
+
+  <div class="hscroll">
+    <div class="htrack">
+      <div class="hpoint"><div class="dot"></div><div class="date">SEP 2026</div><div class="lbl">Professor interview</div></div>
+      <div class="hpoint"><div class="dot"></div><div class="date">OCT 2026</div><div class="lbl">PURS + TA prep</div></div>
+      <div class="hpoint"><div class="dot"></div><div class="date">NOV 2026</div><div class="lbl">PURS submitted / 4+1 started</div></div>
+      <div class="hpoint"><div class="dot"></div><div class="date">JAN 2027</div><div class="lbl">PURS + TA begin</div></div>
+      <div class="hpoint"><div class="dot"></div><div class="date">MAY 2027</div><div class="lbl">PURS complete</div></div>
+      <div class="hpoint"><div class="dot"></div><div class="date">DEC 2027</div><div class="lbl">ESD abstract submitted</div></div>
+      <div class="hpoint"><div class="dot"></div><div class="date">MAY 2028</div><div class="lbl">BS graduation / MS apply</div></div>
+      <div class="hpoint"><div class="dot"></div><div class="date">FALL 2028</div><div class="lbl">Thesis advisor confirmed</div></div>
+      <div class="hpoint"><div class="dot"></div><div class="date">SPRING 2029</div><div class="lbl">Research Track declared</div></div>
+      <div class="hpoint"><div class="dot"></div><div class="date">FALL 2029</div><div class="lbl">Thesis done / PhD prep</div></div>
+      <div class="hpoint"><div class="dot"></div><div class="date">JAN 15</div><div class="lbl">PhD application deadline</div></div>
+      <div class="hpoint"><div class="dot"></div><div class="date">PhD Y1</div><div class="lbl">Candidacy Exam</div></div>
+      <div class="hpoint"><div class="dot"></div><div class="date">PhD Y2</div><div class="lbl">Comprehensive Exam</div></div>
+      <div class="hpoint"><div class="dot"></div><div class="date">PhD Y3</div><div class="lbl">Dissertation Defense</div></div>
+    </div>
+  </div>
+
+  <section class="breakdown">
+    <h2>Timeline Breakdown</h2>
+    <table>
+      <tr><th>When</th><th>Action</th></tr>
+      <tr><td>Sep 2026</td><td>Professor interview — visit office hours of prospective faculty mentors to identify one to work with.</td></tr>
+      <tr><td>Oct 2026</td><td>Finalize the PURS application (500-word proposal + faculty letter of recommendation sent to the PURS Program Manager); apply for the Spring 2027 TA position.</td></tr>
+      <tr><td>Nov 2026</td><td>Submit the complete PURS Spring 2027 application; meet with the Undergraduate Academic Advisor to formally begin the 4+1 process.</td></tr>
+      <tr><td>Jan 2027</td><td>Spring 2027 begins — PURS mentee and TA roles run concurrently.</td></tr>
+      <tr><td>May 2027</td><td>PURS completed — rewrite the project into a 2-page abstract for the ICHRIE ESD Undergraduate Research Symposium (same research, no new project).</td></tr>
+      <tr><td>Dec 2027</td><td>Submit the abstract for the ESD Symposium's ~early-2028 cycle (deadline to be confirmed once ICHRIE publishes the official calendar).</td></tr>
+      <tr><td>May 2028</td><td>Graduate BS — submit the formal MS application (CV, personal statement, GPA transcript, three letters of recommendation, interview).</td></tr>
+      <tr><td>Fall 2028 (MS Term 1)</td><td>Confirm a thesis advisor, prioritizing a faculty member likely to still be taking PhD advisees in three to four years.</td></tr>
+      <tr><td>Spring 2029 (MS Term 2)</td><td>Formally declare the Research Track.</td></tr>
+      <tr><td>Fall 2029</td><td>Complete the Thesis (HRMA 6599) under the advisor's direction; prepare PhD application materials in parallel (GRE/GMAT ideally completed before applying).</td></tr>
+      <tr><td>Before Jan 15 (MS graduation year)</td><td>Submit the PhD application — 3-page personal statement naming specific faculty, three letters of recommendation, GRE/GMAT scores.</td></tr>
+      <tr><td>PhD Year 1</td><td>Complete HRMA 8303, HRMA 8304, and one approved data-analysis course before the May exam window; sit the Candidacy Exam (2nd week of May).</td></tr>
+      <tr><td>PhD Year 2</td><td>Form the dissertation committee; sit the Comprehensive Exam.</td></tr>
+      <tr><td>PhD Year 3</td><td>Dissertation Proposal → data collection → Public Defense.</td></tr>
+    </table>
+  </section>
+
+  <div class="filters">
+
+    <!-- ================= FILTER 1 : 4+1 ================= -->
+    <details class="filter">
+      <summary><span class="titlewrap"><span class="n">1</span>BS/MS Plan (4+1)</span><span class="chev">▸</span></summary>
+      <div class="subfilters">
+
+        <details class="subfilter">
+          <summary><div><span class="when">1</span>Definition &amp; Purpose</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <p>4+1 is an accelerated pathway, not a separate degree — it allows BS Global Hospitality Leadership (GHL) students to begin taking graduate-level courses from the MS in Hospitality Management (also known as "Strategic Hospitality Leadership") while still an undergraduate, shortening the total time to earn both degrees from six years to five.</p>
+            <p>Official purpose: to retain strong GHL students at Hilton College for graduate study, rather than seeing them graduate with a BS and leave for elsewhere or enter the workforce directly.</p>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">2</span>Outcome</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <p>Since 4+1 is only a pathway, its actual outcome is the outcome of the MS in Hospitality Management it leads to (see Filter 2) — 4+1 itself does not produce a separate degree.</p>
+            <p>The specific benefit of 4+1: earning both the BS and MS at a younger age (~22–23 instead of ~23–24), entering the job market a year earlier with an MS in hand, or transitioning into a PhD a year sooner.</p>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">3</span>Entry Requirements</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <table>
+              <tr><th>Criterion</th><th>Detail</th></tr>
+              <tr><td>Standing</td><td>Junior — 60–89 completed credit hours (general UH definition, not Hilton-specific)</td></tr>
+              <tr><td>Cumulative GPA</td><td>Minimum 2.00/4.0</td></tr>
+              <tr><td>Major</td><td>Currently enrolled in BS Global Hospitality Leadership (GHL) — open only to GHL students</td></tr>
+              <tr><td>Interview</td><td>Required, conducted by the Graduate Program Manager</td></tr>
+            </table>
+            <p class="note">Important: admission into 4+1 does NOT automatically mean admission into the MS. It only grants the right to take up to 12 graduate-level credit hours while still an undergraduate. At BS graduation, a formal MS application is still required as a new candidate, meeting the full MS admission requirements (see Filter 2: GPA ≥3.0/4.0, CV, personal statement, three letters of recommendation, separate interview).</p>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">4</span>Application Process — Step by Step</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <ul>
+              <li>Meet with the undergraduate academic advisor to express intent to join 4+1 — ideally as soon as Junior standing is close.</li>
+              <li>The advisor confirms eligibility (60–89 credits, GPA ≥2.00) → refers the student to the Graduate Programs Office.</li>
+              <li>The Graduate Program Manager invites the student for an interview.</li>
+              <li>If the interview is successful → admission into 4+1 begins the following registration cycle.</li>
+              <li>Each subsequent term: continue meeting with the undergraduate academic advisor to determine which courses count toward both the BS and the MS.</li>
+              <li>Once each term's course schedule is published: coordinate with the Graduate Program Manager to confirm which 4+1 courses are approved.</li>
+              <li>Important registration detail: 4+1 students cannot use myUH to self-register for graduate-level courses while holding undergraduate status — registration must go manually through the Graduate Program Manager.</li>
+              <li>At BS graduation: submit a formal application for admission to the MS (same process as any new MS applicant).</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">5</span>Who's in Charge — Contact</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <p>Graduate Program Manager (handles 4+1, MS in Hospitality Management / Strategic Hospitality Leadership, and the Dual MS/MBA):</p>
+            <p><strong>Jason Moreno, M.S.</strong> — jmoreno29@uh.edu — Room CHC 235-E</p>
+            <p>This is the single point of contact for the entire 4+1 process — from initial advising, to interview, to manual course registration each term.</p>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">6</span>Tuition &amp; Specific Financial Mechanism</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <ul>
+              <li>The 12 graduate-level credit hours taken while still an undergraduate: in principle billed at the undergraduate rate ($385.59/SCH, in-state, Academic Year 2027) rather than the graduate rate ($564.95/SCH) — a savings of roughly $2,150 under simple rate arbitrage.</li>
+              <li>If these 12 credits replace an actual elective slot in the BS (the BS requires 10 elective courses) AND the student is on the Fixed Tuition Plan (UHin4) — in theory, UHin4 policy covers "an unlimited number of credit hours" under one fixed per-term rate, so these graduate credits could come at no additional tuition cost, since they fall within an already-paid fixed rate.</li>
+              <li>Not yet confirmed: because registration for these 12 credits goes through a manual process (not myUH), it's necessary to confirm directly with Student Business Services whether they are billed separately at the graduate rate or included under the Fixed Tuition Plan.</li>
+              <li>No dedicated scholarship or funding has been published specifically for the 4+1 stage itself (unlike GTF/assistantships, which apply only once formally a graduate student).</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">7</span>Industry Facts / Practical Notes</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <ul>
+              <li>This is a fairly common model at many U.S. universities (combined/accelerated BS-MS programs), not unique to Hilton College — the same structure exists in the Dual MS/MBA (with Bauer College) and other UH programs.</li>
+              <li>Biggest risk: investing time and effort into 12 graduate credits but ultimately not being admitted to the MS (a full admissions review is still required) — though rejection odds are low with a strong GPA throughout 4+1, this is not an "automatic door."</li>
+              <li>No public data found on the rate of 4+1 students later NOT admitted to the MS (no separate acceptance-rate statistics for the 4+1 cohort) — the end-of-BS MS application should still be prepared as seriously as any new applicant's.</li>
+              <li>No public reviews or discussions found (Reddit, Quora, LinkedIn) from students who have gone through 4+1 at Hilton College specifically — available information comes entirely from official university sources.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </details>
+
+    <!-- ================= FILTER 2 : MS ================= -->
+    <details class="filter">
+      <summary><span class="titlewrap"><span class="n">2</span>MS in Hospitality Management</span><span class="chev">▸</span></summary>
+      <div class="subfilters">
+
+        <details class="subfilter">
+          <summary><div><span class="when">1</span>Definition &amp; Purpose</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <p>Official description: <span class="quote">"designed to meet the hospitality industry's need for individuals who have a variety of professional and academic skills and advanced knowledge."</span> This is an advanced master's degree for those who want to deepen management expertise (not relearn basic operations as in the BS), or pivot into hospitality from a different background.</p>
+            <p>Key distinction from the Executive MHM (a separate online program): the official FAQ states — <span class="quote">"the traditional master's program is designed for students who have limited professional and managerial experience"</span> — meaning the standard MS (including via 4+1) targets those with limited management experience, while the Executive MHM is built for those with many years of management experience.</p>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">2</span>Outcome — Comparing the Two Tracks</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <p>The official page describes one shared outcome for the whole program (not split by track): graduates can take on roles such as hotel manager, event coordinator, or food and beverage director; third-party analysis adds hotel operations, revenue management, human resources, and hospitality finance. But this outcome reflects the <strong>Professional Track</strong>. The two tracks actually lead to very different outcomes:</p>
+            <table>
+              <tr><th></th><th>Professional Track</th><th>Research Track</th></tr>
+              <tr><td>Direct career outcome</td><td>Operating management roles: hotel manager, F&amp;B director, event coordinator, revenue manager</td><td>Not aimed at one specific operating role — the outcome is research capability itself, not a management title</td></tr>
+              <tr><td>Capstone product</td><td>Professional Paper — solves a real operating problem at the student's workplace (via HRMA 6360 Practicum)</td><td>A complete Thesis — literature review, methodology, data collection, analysis, results, written to academic standard</td></tr>
+              <tr><td>Core skill built</td><td>Operations, HR/financial/marketing management at a strategic level</td><td>Research design (HRMA 6190), literature evaluation/analysis (HRMA 6382), statistical analysis (HRMA 6330) — the skillset of a researcher, not a manager</td></tr>
+              <tr><td>If pursuing a PhD next</td><td>Not designed for this purpose — missing both foundational methodology courses</td><td>Designed specifically for this purpose — the official page states: <span class="quote">"designed for students who wish to conduct research and contribute new knowledge to a specific field and are interested in pursuing a Ph.D. after completing their MS degree"</span></td></tr>
+            </table>
+            <p>Why the Research Track is the "open door" to a PhD:</p>
+            <ul>
+              <li>It meets the PhD's degree requirement directly — the PhD asks for "MS in Hospitality Management or equivalent, GPA ≥3.2/4.0," and the Research Track is built explicitly as that stepping stone.</li>
+              <li>The thesis is the first independent research portfolio — a complete body of work from research question to methodology to data collection to results — stronger evidence of "prior research experience" in a PhD application than a professional paper alone.</li>
+              <li>Two methodology courses map directly onto the PhD candidacy exam: HRMA 6190 (Research Proposal) and HRMA 6382 (Methods of Research) are effectively a smaller-scale rehearsal of the same competencies tested at candidacy; HRMA 6330 (Statistical Data Analysis) is the foundation for the PhD's Multivariate Analysis course.</li>
+              <li>Colloquium (HRMA 6101) builds the habit of ongoing academic critique — a skill needed throughout the PhD (dissertation defense, seminars).</li>
+              <li>The relationship with a faculty advisor can extend from MS into PhD. The thesis requires direct guidance from one advisor throughout — an opportunity to build a relationship strong enough for that person (or a departmental colleague) to become a strong letter-writer, or even a future PhD advisor.</li>
+            </ul>
+            <p class="note">Limitation to note: the Research Track's capstone does NOT automatically lead to a publication — the thesis is an internal document filed through UH Libraries' Electronic Thesis and Dissertation (ETD) system, not the same as a journal publication. Turning it into an actual publication requires proactively discussing that possibility with the advisor after completion; it isn't a built-in program feature.</p>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">3</span>Program Structure — 36 Credit Hours, Two Tracks</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <p>The Graduate Program Office evaluates each student's prior coursework and designs a personalized degree plan — not every student follows the exact same template.</p>
+            <p><strong>Research Track (36 credit hours)</strong> — the track aligned with a PhD goal:</p>
+            <table>
+              <tr><th>Group</th><th>Course</th><th>Content</th></tr>
+              <tr><td>Core (14h)</td><td>HRMA 6101 – Colloquium (1h)</td><td>Recurring seminar; students present/hear ongoing research</td></tr>
+              <tr><td></td><td>HRMA 6330 – Statistical Data Analysis (3h)</td><td>Core statistical principles for hospitality research — hypothesis testing, data analysis</td></tr>
+              <tr><td></td><td>HRMA 7353 – Services Management (3h)</td><td>Strategic-level service management</td></tr>
+              <tr><td></td><td>HRMA 7369 – Financial Assets Planning &amp; Management (3h)</td><td>Financial asset planning in the hotel industry — investment, feasibility</td></tr>
+              <tr><td></td><td>HRMA 6382 – Methods of Research (3h)</td><td>Evaluating existing research, learning different research models</td></tr>
+              <tr><td></td><td>HRMA 6190 – Research Proposal (1h)</td><td>Developing a detailed research proposal + data-collection tools</td></tr>
+              <tr><td>Paper (5h)</td><td>HRMA 6360 – Graduate Practicum (3h)</td><td>Solving a real operating problem at the student's workplace</td></tr>
+              <tr><td></td><td>HRMA 6290 – Professional Paper I (2h) or HRMA 6599 – Thesis I (5h)</td><td>Capstone via independent research (Research Track should choose Thesis)</td></tr>
+              <tr><td>Support (9h)</td><td>Choose 3 of 6 + 1 open</td><td>Legal issues, business analytics, HR management, marketing analysis, management strategy, F&amp;B systems</td></tr>
+              <tr><td>Focus (3h)</td><td>Choose 1 of 5</td><td>Pricing/revenue, beverage, lodging operations, gaming/casino, or contract food service management</td></tr>
+              <tr><td>Elective (5h)</td><td>Any HRMA course</td><td>Open to individual direction</td></tr>
+            </table>
+            <p>The <strong>Professional Track</strong> (also 36h) differs by: 16h Core (adds the Practicum and Business Analytics course, drops the two research-methodology courses), 8h elective instead of 5h+5h thesis/paper, and ends in a Professional Paper instead of a Thesis.</p>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">4</span>Entry Requirements</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <table>
+              <tr><th>Item</th><th>Detail</th></tr>
+              <tr><td>Application fee</td><td>$50 (domestic) / $80 (international), via ApplyWeb</td></tr>
+              <tr><td>CV/Resume</td><td>Required</td></tr>
+              <tr><td>Industry experience</td><td>Minimum 1 year hospitality-related work — preferred, not strictly required</td></tr>
+              <tr><td>Personal statement</td><td>~250 words, double-spaced</td></tr>
+              <tr><td>GPA</td><td>Minimum 3.0/4.0 cumulative, from official transcript</td></tr>
+              <tr><td>Letters of recommendation</td><td>Three (a mix of employer and faculty is encouraged)</td></tr>
+              <tr><td>Interview</td><td>Required</td></tr>
+              <tr><td>International students</td><td>US bachelor's or equivalent; a Letter of Financial Backing (bank-confirmed) is also required</td></tr>
+            </table>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">5</span>Application Deadlines</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <table>
+              <tr><th>Term</th><th>Deadline</th></tr>
+              <tr><td>Fall</td><td>May 31 (priority deadline: May 1)</td></tr>
+              <tr><td>Spring</td><td>Oct 1 (international) / Nov 1 (domestic)</td></tr>
+            </table>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">6</span>Who's in Charge — Contact</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <p>Same Graduate Program Manager as 4+1 and the Dual MS/MBA: <strong>Jason Moreno, M.S.</strong> — jmoreno29@uh.edu — Room CHC 235-E.</p>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">7</span>Finances</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <ul>
+              <li>Tuition: 36 credit hours × $564.95/SCH (in-state, AY2027) ≈ $20,338 excluding mandatory fees — estimated all-in $22,000–25,000.</li>
+              <li>Scholarship: awarded by class rank (based on full application + industry experience), subject to available funding. Students not awarded immediately may apply by March 1 each year, after completing at least one term in the program.</li>
+              <li>Out-of-State Tuition Waiver: out-of-state/international students who receive ≥$1,000 from a competitive UH scholarship may qualify to have the out-of-state tuition difference waived.</li>
+              <li>GTF (full tuition waiver): not applicable to MS — PhD/DMA/MFA only.</li>
+              <li>Graduate Assistantship (TA/RA, $600–2,500/month): available, but does not automatically waive tuition.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">8</span>Industry Facts / Practical Notes</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <ul>
+              <li>High degree of personalization — the Graduate Program Office designs each student's own degree plan based on prior coursework, so two students in the same cohort can take noticeably different course sequences.</li>
+              <li>Clear distinction from Executive MHM: the standard MS targets students with limited management experience — matching a profile of a student with internship experience but not yet years of management.</li>
+              <li>No public acceptance-rate data found for this MS program.</li>
+              <li>No specific alumni discussion found (Reddit/Quora/LinkedIn) for the Research Track at Hilton College; general "value of an MS in Hospitality Management" articles found online are not program-specific.</li>
+              <li>The "1 year of industry experience" requirement is preferred only, not a hard condition — in theory a student without experience can still be considered if the rest of the application is strong.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </details>
+
+    <!-- ================= FILTER 3 : PHD ================= -->
+    <details class="filter">
+      <summary><span class="titlewrap"><span class="n">3</span>PhD in Hospitality Administration</span><span class="chev">▸</span></summary>
+      <div class="subfilters">
+
+        <details class="subfilter">
+          <summary><div><span class="when">1</span>Definition &amp; Purpose</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <p>Official description: a program <span class="quote">"designed to provide flexibility, independence, and interdisciplinary study to support students' individual research interests,"</span> preparing students for careers in academia and for deep research roles within the hospitality industry. This is a three-year, in-residence, full-time program — not online, not part-time.</p>
+            <p>Fundamental difference from the MS (even the Research Track): the MS teaches "how to do research" at a foundational level; the PhD trains a student to independently create new research, teach, and secure research funding — producing a complete scholar/professor, not just a strong analyst.</p>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">2</span>Outcome</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <p>The official description develops two groups of competencies:</p>
+            <p><strong>Teaching &amp; Instructional Development:</strong></p>
+            <ul>
+              <li>Develop teaching skills at both undergraduate and graduate level</li>
+              <li>Communicate research results effectively to both academia and industry</li>
+              <li>Build grant-proposal writing skills and develop research funding sources</li>
+            </ul>
+            <p><strong>Research &amp; Knowledge Development:</strong></p>
+            <ul>
+              <li>Contribute to the hospitality field through research and knowledge-sharing</li>
+              <li>Develop theory and expand knowledge in the field</li>
+              <li>Identify and analyze problems within the hospitality context</li>
+              <li>Evaluate and develop solutions using both quantitative and qualitative methods</li>
+            </ul>
+            <p>Key difference from the MS: the official page states that <span class="quote">"all students further develop and publish research in collaboration with faculty during the program"</span> — publication is a default expectation throughout the PhD, not optional as it is at the MS Research Track stage (where the thesis is only an internal document and publication must be self-initiated).</p>
+            <p>Real-world evidence: several current and former Hilton College PhD students have co-published with faculty during the program — for example, a PhD candidate publishing with two faculty members on "On-Farm Produce Safety Practices Assessment in Texas" in <em>Food Protection Trends</em>; and former PhD graduates publishing with faculty in the <em>Journal of Food Protection</em>.</p>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">3</span>Entry Requirements</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <table>
+              <tr><th>Item</th><th>Detail</th></tr>
+              <tr><td>Application fee</td><td>$50 (domestic) / $80 (international), via ApplyWeb</td></tr>
+              <tr><td>CV/Resume</td><td>Required</td></tr>
+              <tr><td>Industry experience</td><td>1 year hospitality-related — preferred, not required</td></tr>
+              <tr><td>Personal statement</td><td>3 pages, double-spaced, 1-inch margins — career goals, research interests, reasons for pursuing a PhD; identifying an aligned Hilton College faculty member is encouraged</td></tr>
+              <tr><td>GRE/GMAT</td><td>Required, official scores sent to UH (GRE code: 6870; GMAT code: XT1-1C-69); the committee reviews all three sections — quantitative, verbal, analytical writing</td></tr>
+              <tr><td>GPA</td><td>Minimum 3.0/4.0 standard; students holding an MS in Hospitality Management or equivalent are recommended to have ≥3.2/4.0</td></tr>
+              <tr><td>Letters of recommendation</td><td>Three (mix of employer and faculty)</td></tr>
+              <tr><td>Interview</td><td>Required — via video call</td></tr>
+              <tr><td>International students</td><td>TOEFL/IELTS/Duolingo (ELP), a Letter of Financial Backing (bank-confirmed, converted to USD), and a copy of the passport's biometric page</td></tr>
+            </table>
+            <p class="note">Prior research experience (publication, conference presentation, or an ongoing research project) — <span class="quote">"while not required for admission, this experience is common among applicants."</span></p>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">4</span>Admission Timeline &amp; Selection Mechanism</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <ul>
+              <li>Fall admission only, reviewed once per year.</li>
+              <li>Fall 2027 cycle: application opens Aug 1, 2026; closes Jan 15, 2027, via ApplyWeb.</li>
+              <li>The number of students admitted each year depends directly on that year's Graduate Tuition Fellowship (GTF) budget — the size of the incoming cohort fluctuates with university finances, not a fixed number.</li>
+              <li>Only applicants eligible for GTF are offered admission — in other words, admission and funding are granted jointly; there is no case of "admitted but unfunded."</li>
+              <li>Internal process: a four-faculty admissions committee reviews applications on a rolling basis each Spring, supported by the Associate Dean for Research &amp; Graduate Studies and the Graduate Program Manager; a video-call interview follows, with an admit/deny decision made shortly after.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">5</span>Program Structure — 57 Credit Hours After MS</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <table>
+              <tr><th>Area</th><th>Course</th></tr>
+              <tr><td>Teaching &amp; Research core</td><td>Teaching Methods in Hospitality Management; Guided Research in Hospitality Industry</td></tr>
+              <tr><td>Research Methods core</td><td>HRMA 8304 – Qualitative Design in Hospitality Administration; Grantsmanship and Technical Writing</td></tr>
+              <tr><td>Data Analysis core</td><td>HRMA 8303 – Multivariate Analysis + two additional advanced data-analysis courses (one must be completed before the candidacy exam)</td></tr>
+              <tr><td>Dissertation</td><td>18 credit hours, topic of the student's choosing</td></tr>
+              <tr><td>Colloquium</td><td>Required seminar every term, throughout the program</td></tr>
+            </table>
+            <p><strong>Timeline:</strong></p>
+            <ul>
+              <li>Year 1: complete HRMA 8303 (Multivariate Analysis), HRMA 8304 (Qualitative Design), and one approved data-analysis course → eligible to sit the Candidacy Exam.</li>
+              <li>Candidacy Exam: held once a year, in the second week of May, over one day, in two parts — (1) Methodology, (2) Data Analysis. Requires a minimum 3.0 GPA and full-time enrollment that term. A Standing Committee reviews results and issues a recommendation. Passing confers official "PhD Candidate" status.</li>
+              <li>Year 2: form the dissertation committee → Comprehensive Exam at year's end.</li>
+              <li>Year 3: Dissertation Proposal → data collection → analysis → writing → Public Defense.</li>
+            </ul>
+            <p><strong>Continuing Eligibility</strong> (from the official GTF terms):</p>
+            <ul>
+              <li>Full-time enrollment every term (except the final term, if approved for reduced load)</li>
+              <li>Maintain a minimum 3.0 GPA throughout the PhD (an MS GPA of at least 3.0 is also required)</li>
+              <li>Mandatory 50% FTE assistantship work for Hilton College — no other outside employment permitted; violation results in loss of GTF</li>
+              <li>Must pass the Candidacy Exam (end of Year 1) and the Comprehensive Exam (end of Year 2) to continue</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">6</span>Funding — Full Detail</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <ul>
+              <li>Graduate Tuition Fellowship (GTF): waives 100% of tuition and mandatory fees — does NOT cover parking, housing, meal plans, or other personal costs.</li>
+              <li>Graduate Assistantship: monthly salary — Year 1 as Research Assistant, Years 2–3 as Teaching Fellow. Appointed for 9 months/year (no work/salary over the summer).</li>
+              <li>Both funding sources come together and are tied tightly to the 50% FTE condition and the GPA requirement above.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">7</span>Industry Facts / Practical Notes</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <ul>
+              <li>Admission is effectively limited by budget, not only by applicant merit — a meaningful difference from the usual picture of "PhD admission based purely on the application." A qualified applicant can still be turned away if that year's GTF allocation is small.</li>
+              <li>No public data found on the exact acceptance rate or current PhD headcount specifically (university-wide postgraduate counts include MS students too, not broken out by PhD).</li>
+              <li>The "Conditional Admittance" clause (BS + GPA 3.5 + GRE/GMAT top 35th percentile + 10 years of supervisory experience) appears only in the 2019–2020 PhD Student Handbook — the current (2026) official page does not repeat this detail, only stating generally that "an MS in Hospitality Management or equivalent will be considered." Whether this clause remains in effect for Fall 2027 has not been confirmed through public sources.</li>
+              <li>The program's own statements that applicants should <span class="quote">"identify faculty members whose work aligns with their interests at the time of application"</span> and <span class="quote">"reach out to potential research advisors to initiate contact"</span> suggest that contacting a prospective advisor beforehand is, in practice, close to expected — even though it isn't listed as a formal requirement. An application with no named faculty member in the personal statement is likely viewed as weaker.</li>
+              <li>The commitment to "publish research in collaboration with faculty during the program" is an official promise, but the actual rate/frequency of publication depends heavily on the individual faculty advisor — worth asking directly when first contacting a prospective advisor.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </details>
+
+    <!-- ================= FILTER 4 : RESEARCH & MENTORSHIP ================= -->
+    <details class="filter">
+      <summary><span class="titlewrap"><span class="n">4</span>Research &amp; Mentorship</span><span class="chev">▸</span></summary>
+      <div class="subfilters">
+
+        <details class="subfilter">
+          <summary><div><span class="when">PURS</span>Provost's Undergraduate Research Scholarship</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <h4>FULL DEFINITION</h4>
+            <p>PURS is a program managed by the Office of Undergraduate Research and Major Awards (OURMA) under the Honors College — but open to students of <strong>any major</strong>, not only Honors College students (hotel and restaurant management is a confirmed eligible major). Students carry out one part-time research project for one term, under the direct guidance of one faculty mentor.</p>
+            <p>Scale of competition: roughly ~20 students university-wide receive this scholarship each term across all majors combined — a concrete sign that this is not an "apply and get in" program.</p>
+
+            <h4>ENTRY REQUIREMENTS</h4>
+            <table>
+              <tr><th>Condition</th><th>Detail</th></tr>
+              <tr><td>Standing</td><td>Sophomore, Junior, or Senior</td></tr>
+              <tr><td>GPA</td><td>Minimum 3.0/4.0</td></tr>
+              <tr><td>Credit hours</td><td>At least 30 completed credit hours by the start of the mentorship term (high school credit not counted)</td></tr>
+              <tr><td>Enrollment during the award term</td><td>Must be enrolled in at least 12 credit hours (unless graduating that term)</td></tr>
+              <tr><td>Faculty mentor</td><td>Must be full-time UH faculty; each faculty member may nominate a maximum of 2 students per term</td></tr>
+              <tr><td>Exclusion</td><td>Having received PURS once before → permanently ineligible to apply again (one-time-only opportunity)</td></tr>
+              <tr><td>Exclusion</td><td>Graduate students and post-baccalaureate students not pursuing a second bachelor's degree are not eligible</td></tr>
+              <tr><td>Scheduling conflict</td><td>Cannot be taken in the same term as a Senior Honors Thesis or Independent Study — an easily overlooked constraint worth planning around</td></tr>
+            </table>
+
+            <h4>APPLICATION MATERIALS &amp; PROCESS</h4>
+            <ul>
+              <li>A faculty member must agree to mentor first — this is a prerequisite; there is no applying without a confirmed mentor.</li>
+              <li>A 500-word research proposal — written in the student's own words (not written by the faculty member), developed in consultation with the mentor; it must state a realistic goal clearly, describe the mentor's role and connect it to the mentor's existing research direction, and contain no spelling/grammar errors.</li>
+              <li>A 1–2 page letter of recommendation from the faculty mentor — sent directly by the faculty member to the PURS Program Manager by email, not submitted by the student.</li>
+              <li>If the research involves human subjects (surveys/interviews) → the student must consult the mentor about the IRB approval process before beginning (see Compliance below).</li>
+            </ul>
+
+            <h4>COMMITMENTS DURING THE TERM</h4>
+            <ul>
+              <li>A minimum of 6–7 hours/week, totaling 100 hours over the term, of research under faculty supervision.</li>
+              <li>Attend a PURS orientation during the first week of the term.</li>
+              <li>Attend at least one research webinar/event during the term.</li>
+              <li>Complete pre- and post-program surveys.</li>
+              <li>Presenting a poster at Undergraduate Research Day is only <span class="quote">"highly encouraged,"</span> NOT required — students still fulfill all program requirements without presenting a poster, though doing so is a strong opportunity for presentation practice and networking.</li>
+            </ul>
+
+            <h4>COMPLIANCE REQUIREMENTS — CITI TRAINING + IRB</h4>
+            <ul>
+              <li><strong>CITI Responsible Conduct of Research (RCR) training</strong> is required for every student researcher at UH, even under direct faculty supervision — applies to SURF, PURS, and Senior Honors Thesis programs since Spring 2020. Registered through the CITI Program site, selecting "University of Houston" as the institution.</li>
+              <li>Certificate submission deadline: the Official Reporting Day (ORD) — the 12th class day of a Fall/Spring term, or the 4th class day of a Summer term.</li>
+              <li><strong>IRB (Institutional Review Board) approval</strong> is required if the research observes, interviews, or surveys human subjects — very likely applicable to behavioral/cognitive hospitality research. Standard review takes 2–3 weeks once the application clears department/college-level routing, but it's recommended to submit at least one month before the planned data-collection start date to allow buffer time.</li>
+              <li>All research participants — including the student — must complete CITI training BEFORE the IRB application can be approved; the two requirements are sequential, not parallel.</li>
+            </ul>
+            <p class="note">Planning consequence: if PURS Spring 2027 begins ~January 2027 and IRB approval is needed before data collection, CITI training and the IRB submission should be completed starting at the end of Fall 2026 — not delayed until PURS officially begins — to avoid losing the first few weeks of the term to administrative approval.</p>
+
+            <h4>WHAT 6–7 HOURS/WEEK ACTUALLY LOOKS LIKE</h4>
+            <p>There is no fixed template — the exact responsibilities depend entirely on the nature of the project and the mentor's assignments. The most common tasks, ranked by how frequently they come up:</p>
+            <table>
+              <tr><th>Type of work</th><th>What it actually looks like</th></tr>
+              <tr><td>Literature review</td><td>Finding, reading, and summarizing articles/studies related to the mentor's topic — the most common task, present in nearly every project</td></tr>
+              <tr><td>Data entry &amp; management</td><td>Entering survey/experiment data into software (SPSS, Excel), cleaning data, organizing databases</td></tr>
+              <tr><td>Data collection</td><td>Running surveys, interviewing participants, recruiting participants, sometimes going to a field site to collect real-world data</td></tr>
+              <tr><td>Preliminary analysis</td><td>Running descriptive statistics, helping code variables — not deep analysis (that remains the mentor's or a PhD student's work)</td></tr>
+              <tr><td>Preparing research materials</td><td>Preparing questionnaires, interview protocols, and IRB (ethics application) materials if the project involves human subjects</td></tr>
+              <tr><td>Writing &amp; presentation support</td><td>Helping compile results into a report, sometimes helping prepare slides or posters for a conference presentation</td></tr>
+            </table>
+            <p>Applied to survey-based hospitality behavior research more broadly: this kind of research tends to lean on quantitative surveys and behavioral analysis, so the most likely real tasks are reading hospitality-industry literature, helping design and distribute surveys, entering and cleaning survey data, and summarizing literature — not physical lab work.</p>
+
+            <h4>WHAT THE STUDENT ACTUALLY CONTRIBUTES — NOT JUST "ODD JOBS"</h4>
+            <ul>
+              <li>Frees up time for work that's necessary but time-consuming: literature review and data entry take the most hours but require the least specialized expertise — the mentor can spend the freed-up time on deeper analysis and writing instead of doing everything alone.</li>
+              <li>A fresh perspective and new energy: research notes that new students often bring "fresh minds" that help faculty see a problem from a different angle.</li>
+              <li>Future co-authorship potential: on some projects, if a student's contribution is substantial enough, they may be listed as a co-author on publication — not automatic, and dependent on the mentor and the level of contribution.</li>
+              <li>"Broader impact" for grant applications: for NSF grants specifically, undergraduate involvement boosts the "broader impact" score when faculty write funding proposals — meaning faculty have a real, practical incentive, not just goodwill, to take on a student.</li>
+            </ul>
+
+            <h4>WHAT THE MENTOR GETS IN RETURN — NOT JUST "CHARITY"</h4>
+            <p>Taking on a student isn't one-sided sacrifice by the faculty member — there are real benefits, even if not everyone says so out loud:</p>
+            <ul>
+              <li>Higher overall research output — cited research shows faculty who mentor students tend to have a more productive research agenda, not slowed down by the time spent teaching a student.</li>
+              <li>Improved teaching quality — mentoring students leads to improved classroom engagement and more accessible teaching styles, since one-on-one mentoring helps faculty better understand how students learn.</li>
+              <li>Interpersonal / socio-emotional benefits — faculty genuinely enjoy watching a student grow and building a long-term professional relationship; a real motivator, not just marketing language.</li>
+              <li>"Academic DNA transfer" — passing on research thinking and methods to the next generation; a faculty member whose student goes on to a PhD or becomes a researcher gains a form of academic legacy.</li>
+              <li>Indirect credit toward grant applications (as noted above).</li>
+            </ul>
+            <p class="note">Worth knowing, so as not to over-romanticize it: one source on mentoring undergraduates states plainly that <span class="quote">"the academy itself is a system that provides few incentives to mentor... These relationships are not valued when it comes time for promotion or tenure. Grants are not awarded based on mentoring productivity."</span> In other words, a faculty member's motivation to take on a student mostly comes from personal passion for teaching and watching students grow — not from formal institutional reward. This is exactly why choosing a mentor who is genuinely inclined to mentor matters, and it explains why some otherwise-eligible faculty still decline to take on more students — not for lack of capacity, but because mentoring isn't a mandatory obligation.</p>
+
+            <h4>PUBLICATION POTENTIAL</h4>
+            <p>UH maintains an official page, "Publications with Undergraduate Co-Authors," listing real published papers with undergraduate co-authors — for example, on guest support for smoke-free policies at a homeless shelter, and a qualitative study on a tobacco-cessation training program, among others across several journals.</p>
+            <p>However, the correct way to read this: it's a multi-year aggregate across several programs (SURF, REACH, independent projects — not PURS alone), not evidence that "doing PURS guarantees a publication." Publication depends on (1) whether the mentor's project is publication-bound, (2) whether the student's contribution is substantial enough to merit co-authorship, and (3) time — most publications take longer than one term to materialize, so PURS (~15 weeks) is often the starting point of a longer project, with any resulting paper appearing later, possibly while already in the MS or PhD.</p>
+            <p class="note">Bottom line: publication potential is not guaranteed — it depends entirely on the chosen faculty mentor and whether the project continues beyond the PURS term.</p>
+
+            <h4>CONTACTS</h4>
+            <table>
+              <tr><th>Role</th><th>Contact</th></tr>
+              <tr><td>PURS Program Manager</td><td>Livia Garza — llgarza9@CougarNet.UH.EDU</td></tr>
+              <tr><td>CITI training guidance</td><td>Ms. Nettie Martinez (via Honors College Research Resources)</td></tr>
+              <tr><td>CITI technical support</td><td>mmpariyo@Central.UH.EDU</td></tr>
+              <tr><td>IRB for student-led projects</td><td>Ms. Nettie Martinez (via Honors College Research Resources)</td></tr>
+              <tr><td>General IRB questions</td><td>CPHS@central.uh.edu</td></tr>
+            </table>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">TA</span>Teaching Assistant Role</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <p>Teaching assistant duties for an undergraduate course — grading, holding office hours, and general instructional support. The exact scope depends on the course and the supervising faculty member, and is typically tied to a course the student has already completed well, since that course record gives the faculty member an existing basis for evaluation.</p>
+            <div class="gains">
+              <div class="gain me">
+                <div class="lbl">WHAT I GAIN</div>
+                <ul>
+                  <li>Sustained, structured contact with a faculty mentor outside the research setting</li>
+                  <li>A demonstrated track record of independence and reliability — the quality faculty weigh most before committing to a research advisee ("your supervisor should not have to prompt you")</li>
+                </ul>
+              </div>
+              <div class="gain mentor">
+                <div class="lbl">WHAT THE MENTOR GAINS</div>
+                <ul>
+                  <li>Reduced grading and instructional workload</li>
+                  <li>An extended, low-risk window to observe the student's work quality before a deeper research commitment</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">ESD</span>Eta Sigma Delta &amp; the ICHRIE ESD Undergraduate Research Symposium</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <h4>DEFINITION &amp; HISTORY OF ETA SIGMA DELTA (ESD)</h4>
+            <p>ESD (Eta Sigma Delta) is the International Hospitality Management Honor Society, founded in 1978 by a group of students at the Whittemore School of Business and Economics, University of New Hampshire (now the Peter T. Paul College of Business and Economics) — the founding rationale was that other fields already had their own honor societies, but hospitality/tourism, one of the largest industries in the world, did not yet have one. Today it has more than 90 chapters worldwide, operating under the sponsorship of International CHRIE.</p>
+            <p>Five "Points of Honor" ESD upholds (symbolic, read at induction ceremonies): Creativity, Ethics, Excellence, Leadership, Service.</p>
+
+            <h4>ESD MEMBERSHIP REQUIREMENTS</h4>
+            <table>
+              <tr><th>Requirement</th><th>Detail</th></tr>
+              <tr><td>Institution</td><td>Must be a registered chapter — the institution must be an Executive/Institutional or Gold Premium/Premium Member of International CHRIE</td></tr>
+              <tr><td>Credit hours</td><td>Completed ≥50% of the credit hours required for graduation</td></tr>
+              <tr><td>Standing</td><td>Minimum Sophomore or Junior standing, provided the credit-hour percentage above is met</td></tr>
+              <tr><td>Major</td><td>Must be officially declared as a Hospitality Management major, having completed at least one year at the institution where applying</td></tr>
+              <tr><td>GPA</td><td>≥3.00/4.00, or top 20th percentile of the class if the institution doesn't use a 4.0 scale</td></tr>
+              <tr><td>Membership benefits</td><td>International networking through ICHRIE, a recurring ESD column in the ICHRIE newsletter, free ICHRIE student membership through December after graduation (eligible for full membership after that), lifetime ESD title</td></tr>
+            </table>
+
+            <h4>SYMPOSIUM SUBMISSION REQUIREMENTS</h4>
+            <table>
+              <tr><th>Requirement</th><th>Detail</th></tr>
+              <tr><td>Standing</td><td>Junior/Senior</td></tr>
+              <tr><td>Field of study</td><td>Enrolled in an undergraduate Hospitality/Tourism Management program</td></tr>
+              <tr><td>Institution</td><td>Must belong to ICHRIE (Hilton College has prior precedent — see below)</td></tr>
+              <tr><td>Faculty co-author</td><td>A faculty mentor/advisor must be listed as co-author — submission isn't possible without a supervising faculty member</td></tr>
+              <tr><td>ESD membership</td><td>NOT required — the official page states "not limited to ESD members"</td></tr>
+              <tr><td>Submission</td><td>Abstract/paper by track (2 pages for the initial submission round, per prior research)</td></tr>
+              <tr><td>Fee</td><td>Free to register and attend</td></tr>
+            </table>
+
+            <h4>SYMPOSIUM HISTORY — THREE CYCLES SO FAR</h4>
+            <table>
+              <tr><th>Cycle</th><th>Year</th><th>Location</th></tr>
+              <tr><td>1st</td><td>2024</td><td>Miami, Florida</td></tr>
+              <tr><td>2nd</td><td>2025</td><td>Tampa, Florida (University of South Florida)</td></tr>
+              <tr><td>3rd</td><td>2026</td><td>Boston University School of Hospitality Administration (under Dean Arun Upneja)</td></tr>
+              <tr><td>4th (expected)</td><td>~2027</td><td>Not yet announced</td></tr>
+              <tr><td>5th (expected — the realistic cycle to target)</td><td>~2028</td><td>Not yet announced</td></tr>
+            </table>
+            <p>The 2026 event ran two days (Feb 26–27, 2026), including a General Session (keynote, panel discussion with real industry leaders such as the CEO of a restaurant management company and an Adjunct Professor who is also a restaurant owner), two Concurrent Sessions split across three fixed tracks, an induction ceremony for new ESD members, and the Best Paper/Meritorious Paper award ceremony.</p>
+            <p>Three fixed tracks each cycle: Consumer Behavior/Technology; Event/Tourism/Sustainability; Hospitality/HR/Hospitality Education.</p>
+
+            <h4>HILTON COLLEGE'S PAPER AT THE 2026 CYCLE</h4>
+            <p><strong>Title:</strong> "Restaurant Firms' Risk Reduction Strategies for Food Crisis: In A Case with the Outbreak of Avian Influenza (H5N1)"</p>
+            <p><strong>Authors:</strong> Michael Croft, Tres Kimball, and Dr. Jaewook Kim (University of Houston)</p>
+            <p><strong>Track:</strong> Consumer Behavior/Technology</p>
+            <p><strong>Program slot:</strong> Concurrent Session 2, Day 2 (Feb 27, 2026), 1:15–2:30 PM, Room SHA 111</p>
+
+            <h4>BENEFITS IF SELECTED TO PRESENT</h4>
+            <ul>
+              <li>35% off tuition for Boston University's School of Hospitality Administration MS program (1-year and 2-year tracks) — valid through 2029, for every author selected to present, not only the top award winner</li>
+              <li>Best Paper and Meritorious Paper Award — presented at the closing ceremony</li>
+              <li>Direct networking with real industry leaders (the 2026 cycle's panel discussion included the CEO of a restaurant management company and an Adjunct Professor who also owns a restaurant) — not academics alone</li>
+            </ul>
+
+            <h4>CONTACTS</h4>
+            <table>
+              <tr><th>Contact</th><th>Role</th></tr>
+              <tr><td>esd@chrie.org</td><td>Official ICHRIE ESD email</td></tr>
+              <tr><td>Dr. Godwin-Charles Ogbeide</td><td>Symposium Chair / ESD Board of Governors Director of Professional Development</td></tr>
+              <tr><td>Dr. Donna Albano</td><td>Chair, ESD Board of Governors (Stockton University)</td></tr>
+              <tr><td>Dr. Jaewook Kim (UH)</td><td>Has prior precedent bringing Hilton College students to present (2026) — the best internal contact, with firsthand experience</td></tr>
+            </table>
+          </div>
+        </details>
+
+      </div>
+    </details>
+
+    <!-- ================= FILTER 5 : CONTINUITY & PLANNING ================= -->
+    <details class="filter">
+      <summary><span class="titlewrap"><span class="n">5</span>Continuity &amp; Planning</span><span class="chev">▸</span></summary>
+      <div class="subfilters">
+
+        <details class="subfilter">
+          <summary><div><span class="when">GATES</span>Transition Gates</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <table>
+              <tr><th>Gate</th><th>Condition</th><th>Automatic?</th></tr>
+              <tr><td>BS → 4+1</td><td>Junior standing (60–89 credits, GPA ≥2.00) + interview with the Graduate Program Manager</td><td>No — interview must be passed</td></tr>
+              <tr><td>4+1 → Formal MS</td><td>Full application (CV, 250-word personal statement, GPA ≥3.0/4.0, 3 letters of recommendation, separate interview) at BS graduation</td><td><strong>No</strong> — the most commonly misunderstood point: completing the 12 4+1 credits does not guarantee MS admission</td></tr>
+              <tr><td>MS (Professional) → MS (Research Track)</td><td>Track declared at the end of Year 1 (2nd term)</td><td>Can be self-selected, but whether 4+1 defaults into one track first is unconfirmed</td></tr>
+              <tr><td>MS → PhD</td><td>Separate PhD application (3-page personal statement, GRE/GMAT, 3 letters of recommendation, video interview with a 4-faculty committee)</td><td><strong>No</strong> — and also depends on that year's GTF budget, not application strength alone</td></tr>
+            </table>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">CONTINUITY</span>Academic Throughline</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <p>This is the real strength of the Research Track pathway: methodology courses don't stand apart but build directly on one another across stages:</p>
+            <table>
+              <tr><th>Stage</th><th>Course</th><th>Builds toward</th></tr>
+              <tr><td>MS Research Track</td><td>Statistical Data Analysis</td><td>Foundational statistics for research</td></tr>
+              <tr><td>MS Research Track</td><td>Methods of Research</td><td>Literature evaluation, research models</td></tr>
+              <tr><td>MS Research Track</td><td>Research Proposal</td><td>Writing a full proposal + data-collection tool design</td></tr>
+              <tr><td>MS Research Track</td><td>Thesis</td><td>First complete independent research cycle</td></tr>
+              <tr><td>PhD Year 1</td><td>Multivariate Analysis</td><td>Direct upgrade from Statistical Data Analysis — advanced multivariate statistics</td></tr>
+              <tr><td>PhD Year 1</td><td>Qualitative Design</td><td>Direct upgrade from Methods of Research — deeper qualitative research design</td></tr>
+              <tr><td>PhD Year 1</td><td>Grantsmanship &amp; Technical Writing</td><td>New skill — grant-proposal writing, not present at the MS level</td></tr>
+              <tr><td>PhD Year 3</td><td>Dissertation (18h)</td><td>Direct upgrade from Thesis — larger scope, requiring a genuinely new contribution to knowledge</td></tr>
+            </table>
+            <p>If the Research Track (not Professional) is chosen at the MS stage, a student does not start over at the PhD stage but continues the same thread — the core reason the Research Track is described as being <span class="quote">"for students... interested in pursuing a Ph.D."</span></p>
+
+            <h4>PROPOSED 12-CREDIT PRIORITY FOR THE 4+1 STAGE</h4>
+            <p>4+1 allows up to 12 graduate credit hours before BS graduation. Based on the Research Track structure above, here is a proposed priority order to both target the PhD goal and use the full 12-hour allowance:</p>
+            <table>
+              <tr><th>Priority</th><th>Course</th><th>Credit</th><th>Reason</th></tr>
+              <tr><td>1</td><td>HRMA 6330 — Statistical Data Analysis</td><td>3</td><td>Foundation directly feeding into HRMA 8303 (Multivariate Analysis) at the PhD level</td></tr>
+              <tr><td>2</td><td>HRMA 6382 — Methods of Research</td><td>3</td><td>Foundation directly feeding into HRMA 8304 (Qualitative Design) at the PhD level</td></tr>
+              <tr><td>3</td><td>HRMA 6190 — Research Proposal</td><td>1</td><td>Start practicing proposal writing as early as possible — direct groundwork for the dissertation proposal</td></tr>
+              <tr><td>4</td><td>HRMA 6101 — Colloquium</td><td>1</td><td>A 1-credit course, easy to fit into a BS schedule, builds an early seminar-attendance habit</td></tr>
+              <tr><td>5</td><td>HRMA 7369 — Financial Assets Planning &amp; Management</td><td>3</td><td>The remaining Research Track core course — best taken early to lighten the final MS year</td></tr>
+              <tr><td>6</td><td>HRMA 7353 — Services Management</td><td>1 (of the remaining 12h)</td><td>Lower priority — can be swapped for a different Support/Focus course if scheduling doesn't align</td></tr>
+            </table>
+            <p>Priorities 1–3 (7 credit hours) are the "must-take" group — the three methodology courses that bridge directly into the PhD. Priorities 4–6 are "nice to take if the schedule allows" — they ease the final MS year but don't directly affect the PhD foundation.</p>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">MONEY</span>Financial Continuity by Stage</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <table>
+              <tr><th>Stage</th><th>Cost</th><th>Funding available</th></tr>
+              <tr><td>BS (incl. 4+1)</td><td>Standard BS tuition + 12 graduate credits (undergrad rate, or possibly $0 extra under the Fixed Tuition Plan — not yet confirmed)</td><td>No dedicated funding for the 4+1 stage itself</td></tr>
+              <tr><td>MS (remaining 24 credits)</td><td>≈ $13,500–20,000 in-state, depending on how much was already paid via 4+1</td><td>Graduate Assistantship ($600–2,500/month) if secured — NO GTF (GTF is PhD-only)</td></tr>
+              <tr><td>PhD (3 years)</td><td>$0 tuition under GTF (excludes parking, housing, meals)</td><td>GTF (full tuition waiver) + Graduate Assistantship (RA Year 1, Teaching Fellow Years 2–3), 9 months/year</td></tr>
+            </table>
+          </div>
+        </details>
+
+        <details class="subfilter">
+          <summary><div><span class="when">RISK</span>Biggest Risk at Each Stage</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <table>
+              <tr><th>Stage</th><th>Risk</th></tr>
+              <tr><td>4+1 → MS</td><td>Not automatically admitted — rare to be rejected with a strong GPA, but it is still a real review, not a formality</td></tr>
+              <tr><td>During MS</td><td>If the Professional Track is chosen instead of the Research Track (or if 4+1 defaults into Professional Track), the two foundational methodology courses needed for the PhD are missed — worth confirming early whether 4+1 allows selecting the Research Track from the start</td></tr>
+              <tr><td>MS → PhD</td><td>PhD admission is capped by the annual GTF budget — a fully qualified application can still be turned away if that year's funding is limited</td></tr>
+              <tr><td>During PhD</td><td>Failing the Candidacy Exam (end of Year 1) or the Comprehensive Exam (end of Year 2) — both are hard gates; failing either means the program cannot continue</td></tr>
+            </table>
+          </div>
+        </details>
+
+      </div>
+    </details>
+
+    <!-- ================= FILTER 6 : SOURCES ================= -->
+    <details class="filter">
+      <summary><span class="titlewrap"><span class="n">6</span>Sources</span><span class="chev">▸</span></summary>
+      <div class="subfilters">
+        <details class="subfilter" open>
+          <summary><div><span class="when">2026</span>Official Public Pages</div><span class="chev">▸</span></summary>
+          <div class="content">
+            <ul class="sources">
+              <li><a href="https://www.uh.edu/hilton-college/degrees-and-programs/graduate/bs-ms-plan/" target="_blank" rel="noopener">BS/MS Plan (4+1) — official program page</a></li>
+              <li><a href="https://www.uh.edu/hilton-college/degrees-and-programs/graduate/ms-hospitality-management/index.php" target="_blank" rel="noopener">MS in Hospitality Management — official program page</a></li>
+              <li><a href="https://www.uh.edu/hilton-college/admissions/graduate/admission-requirements/ms-hospitality-management/" target="_blank" rel="noopener">MS in Hospitality Management — admission requirements</a></li>
+              <li><a href="https://www.uh.edu/hilton-college/degrees-and-programs/course-catalogs/graduate/ms-in-hospitality-management/" target="_blank" rel="noopener">MS in Hospitality Management — course catalog</a></li>
+              <li><a href="https://www.uh.edu/hilton-college/degrees-and-programs/graduate/phd-hospitality-administration/" target="_blank" rel="noopener">PhD in Hospitality Administration — official program page</a></li>
+              <li><a href="https://www.uh.edu/graduate-school/graduate-funding/hotel-and-restaurant-management/index.php" target="_blank" rel="noopener">Graduate funding, Hilton College — UH Graduate School</a></li>
+              <li><a href="https://www.uh.edu/graduate-school/cost-and-aid/awards-scholarships-and-fellowships/graduate-tuition-fellowship/hilton.php" target="_blank" rel="noopener">Graduate Tuition Fellowship (GTF) — Hilton College terms</a></li>
+              <li><a href="https://www.uh.edu/hilton-college/hrmbulletinboard/forms/fall-2019-phd-student-handbook.pdf" target="_blank" rel="noopener">PhD Student Handbook, 2019–2020 (candidacy exam mechanics)</a></li>
+              <li><a href="https://www.uh.edu/honors/undergraduate-research/our-programs/purs/" target="_blank" rel="noopener">PURS — Provost's Undergraduate Research Scholarship</a></li>
+              <li><a href="https://www.bu.edu/hospitality/events/conferences/ichrie-conference/" target="_blank" rel="noopener">ICHRIE ESD Undergraduate Research Symposium — conference info</a></li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </details>
+
+  </div>
+
+  <footer>
+    Administrative contact for the 4+1 pathway and MS admission: Graduate Program Manager, Hilton College (jmoreno29@uh.edu).<br>
+    Research summary prepared September 2026, based on official Hilton College program pages, UH Financial Services, and the PhD Student Handbook.
+  </footer>
+
+</div>
+</div>
+</body>
+</html>

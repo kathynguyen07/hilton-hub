@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thi's Hilton College Hub</title>
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:#f5f4f0;color:#26251f;}
+  .sitenav { background:#1b1a16; padding:10px 24px; display:flex; gap:16px; align-items:center; }
+  .sitenav a { color:#f5f4f0; text-decoration:none; font-size:13px; padding:6px 12px; border-radius:6px; }
+  .sitenav a.active { background:#3a3830; font-weight:600; }
+  main{max-width:760px;margin:0 auto;padding:56px 24px 80px;}
+  h1{font-size:26px;font-weight:700;margin:0 0 8px;}
+  p.sub{color:#6b6a63;font-size:14px;margin:0 0 36px;line-height:1.6;}
+  .cards{display:grid;gap:16px;}
+  .card{display:block;background:#fff;border:1px solid #e2e0d8;border-radius:14px;padding:22px 24px;text-decoration:none;color:inherit;transition:box-shadow .15s,transform .1s;}
+  .card:hover{box-shadow:0 6px 18px -6px rgba(0,0,0,.15);transform:translateY(-1px);}
+  .card h2{font-size:17px;margin:0 0 6px;}
+  .card p{font-size:13px;color:#6b6a63;margin:0;line-height:1.5;}
+  footer{max-width:760px;margin:0 auto;padding:0 24px 40px;font-size:12px;color:#93928a;}
+</style>
+</head>
+<body>
+<div class="sitenav">
+  <a href="index.html" class="active">Home</a>
+  <a href="faculty.html">Faculty Directory</a>
+  <a href="phd-pathway.html">PhD Pathway</a>
+</div>
+<main>
+  <h1>Hilton College — Research &amp; Pathway Hub</h1>
+  <p class="sub">Two reference tools built while planning research mentorship and the road to a PhD in Hospitality Administration.</p>
+  <div class="cards">
+    <a class="card" href="faculty.html">
+      <h2>Faculty Directory</h2>
+      <p>Card grid of Hilton College faculty — research interests, classes taught, degree-plan course matches, and a research-paper database for potential mentors.</p>
+    </a>
+    <a class="card" href="phd-pathway.html">
+      <h2>Pathway to the PhD</h2>
+      <p>Timeline and filterable breakdown of the 4+1, MS (Research Track), and PhD in Hospitality Administration — requirements, funding, and continuity notes.</p>
+    </a>
+  </div>
+</main>
+<footer>Built for personal academic planning · Hilton College, University of Houston</footer>
+</body>
+</html>
